@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article | Forest News</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .article-header {
+            margin-bottom: 30px;
+        }
+        
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .article-meta .category {
+            margin-right: 15px;
+        }
+        
+        .article-meta .date {
+            margin-right: 15px;
+        }
+        
+        .article-meta .author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .article-meta .author img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 400px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        
+        .related-articles {
+            margin-top: 60px;
+        }
+        
+        .related-articles h2 {
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-header h1 {
+                font-size: 2rem;
+            }
+            
+            .article-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Forest News</h1>
+                <p class="tagline">Environmental News & Conservation Updates</p>
+            </div>
+            <div class="language-selector">
+                <button id="en-btn" class="active">English</button>
+                <button id="am-btn">አማርኛ</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="en">Home</a><a href="index.html" class="am">መነሻ</a></li>
+                    <li><a href="#" class="en">Latest News</a><a href="#" class="am">አዲስ ዜናዎች</a></li>
+                    <li><a href="#" class="en">Conservation</a><a href="#" class="am">ጥበቃ</a></li>
+                    <li><a href="#" class="en">Climate</a><a href="#" class="am">አየር ንብረት</a></li>
+                    <li><a href="#" class="en">Biodiversity</a><a href="#" class="am">ስነ-ህይወት ብዝሃነት</a></li>
+                    <li><a href="#" class="en">About</a><a href="#" class="am">ስለ እኛ</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article id="article-content">
+            <!-- Article content will be dynamically inserted here -->
+        </article>
+        
+        <section class="related-articles">
+            <h2 class="en">Related Articles</h2>
+            <h2 class="am">ተዛማጅ ዜናዎች</h2>
+            <div class="related-grid" id="related-articles">
+                <!-- Related articles will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="en">Subscribe to Our Newsletter</h2>
+                <h2 class="am">ለዜና መጽሄታችን ይመዝገቡ</h2>
+                <p class="en">Stay updated with the latest environmental news and conservation efforts in Ethiopia and beyond.</p>
+                <p class="am">በኢትዮጵያ እና ከዚያ ባሻገር ባሉ አዳዲስ የአካባቢ ጥበቃ ዜናዎች እና የጥበቃ ጥረቶች ላይ ወቅታዊ መረጃ ይኑርዎት።</p>
+                
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email Address" class="en">
+                    <input type="email" placeholder="የኢሜይል አድራሻዎ" class="am">
+                    <button type="submit" class="en">Subscribe</button>
+                    <button type="submit" class="am">ይመዝገቡ</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Forest News</h2>
+                    <p class="en">Environmental News & Conservation Updates</p>
+                    <p class="am">የአካባቢ ጥበቃ ዜናዎች እና የጥበቃ ዝማኔዎች</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3 class="en">Quick Links</h3>
+                        <h3 class="am">ፈጣን ማገናኛዎች</h3>
+                        <ul>
+                            <li><a href="index.html" class="en">Home</a><a href="index.html" class="am">መነሻ</a></li>
+                            <li><a href="#" class="en">Latest News</a><a href="#" class="am">አዲስ ዜናዎች</a></li>
+                            <li><a href="#" class="en">Conservation</a><a href="#" class="am">ጥበቃ</a></li>
+                            <li><a href="#" class="en">Climate</a><a href="#" class="am">አየር ንብረት</a></li>
+                            <li><a href="#" class="en">Biodiversity</a><a href="#" class="am">ስነ-ህይወት ብዝሃነት</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 class="en">Categories</h3>
+                        <h3 class="am">ምድቦች</h3>
+                        <ul>
+                            <li><a href="#" class="en">Forest Conservation</a><a href="#" class="am">የደን ጥበቃ</a></li>
+                            <li><a href="#" class="en">Climate Change</a><a href="#" class="am">የአየር ንብረት ለውጥ</a></li>
+                            <li><a href="#" class="en">Indigenous Knowledge</a><a href="#" class="am">የአካባቢ እውቀት</a></li>
+                            <li><a href="#" class="en">Sustainable Practices</a><a href="#" class="am">ዘላቂ ልምዶች</a></li>
+                            <li><a href="#" class="en">Technology</a><a href="#" class="am">ቴክኖሎጂ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 class="en">Contact</h3>
+                        <h3 class="am">አግኙን</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> <span class="en">Teppi, Sheka Zone, Ethiopia</span><span class="am">ጠፍጢ፣ ሼካ ዞን፣ ኢትዮጵያ</span></li>
+                            <li><i class="fas fa-envelope"></i> <a href="mailto:contact@forestnews.com">contact@forestnews.com</a></li>
+                            <li><i class="fas fa-phone"></i> <a href="tel:+251912345678">+251 912 345 678</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="https://tiktok.com/@Lexas_Alex" target="_blank"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://youtube.com/c/Lexi_Tube" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="en">&copy; 2025 Forest News. All rights reserved. Created by Alemayehu Alemu.</p>
+                <p class="am">&copy; 2025 ፎረስት ኒውስ። መብቱ በህግ የተጠበቀ ነው። በአለማየሁ አለሙ የተፈጠረ።</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/cms.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get article ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = parseInt(urlParams.get('id'));
+            
+            if (!articleId) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Get article from CMS
+            const cms = window.forestNewsCMS;
+            const article = cms.getArticleById(articleId);
+            
+            if (!article) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Populate article content
+            const articleContent = document.getElementById('article-content');
+            articleContent.innerHTML = `
+                <header class="article-header">
+                    <h1 class="en">${article.title_en}</h1>
+                    <h1 class="am">${article.title_am}</h1>
+                    <div class="article-meta">
+                        <span class="category">${article.category}</span>
+                        <span class="date">${article.date}</span>
+                        <span class="author">
+                            <img src="images/author-placeholder.jpg" alt="${article.author}">
+                            ${article.author}
+                        </span>
+                    </div>
+                </header>
+                
+                <div class="article-image">
+                    <img src="${article.image}" alt="${article.title_en}">
+                </div>
+                
+                <div class="article-content">
+                    <div class="en">${formatContent(article.content_en)}</div>
+                    <div class="am">${formatContent(article.content_am)}</div>
+                </div>
+            `;
+            
+            // Get related articles (same category, excluding current article)
+            const relatedArticles = cms.getArticlesByCategory(article.category)
+                .filter(a => a.id !== article.id)
+                .slice(0, 3);
+            
+            // Populate related articles
+            const relatedGrid = document.getElementById('related-articles');
+            
+            if (relatedArticles.length === 0) {
+                document.querySelector('.related-articles').style.display = 'none';
+            } else {
+                relatedArticles.forEach(relatedArticle => {
+                    const articleHTML = `
+                        <article class="news-card" data-article-id="${relatedArticle.id}">
+                            <div class="news-image">
+                                <img src="${relatedArticle.image}" alt="${relatedArticle.title_en}">
+                            </div>
+                            <div class="news-content">
+                                <span class="category">${relatedArticle.category}</span>
+                                <h3 class="en">${relatedArticle.title_en}</h3>
+                                <h3 class="am">${relatedArticle.title_am}</h3>
+                                <div class="news-meta">
+                                    <span class="date">${relatedArticle.date}</span>
+                                    <a href="article.html?id=${relatedArticle.id}" class="read-more en">Read More</a>
+                                    <a href="article.html?id=${relatedArticle.id}" class="read-more am">ተጨማሪ ያንብቡ</a>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                    
+                    relatedGrid.innerHTML += articleHTML;
+                });
+            }
+            
+            // Helper function to format content with paragraphs
+            function formatContent(content) {
+                return content.split('\n\n').map(paragraph => `<p>${paragraph}</p>`).join('');
+            }
+        });
+    </script>
+</body>
+</html>

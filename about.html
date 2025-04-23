@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Forest News</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .about-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-mission {
+            background-color: var(--light-color);
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 50px;
+        }
+        
+        .about-mission h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .about-mission p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .team-section {
+            margin-bottom: 50px;
+        }
+        
+        .team-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .team-member {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .team-member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 30px;
+            flex-shrink: 0;
+        }
+        
+        .team-member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-member-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .team-member-info .role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .team-member-info p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .team-member-info .social-links {
+            display: flex;
+        }
+        
+        .team-member-info .social-links a {
+            margin-right: 15px;
+        }
+        
+        .contact-section {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-item {
+            text-align: center;
+        }
+        
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .contact-item h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .team-member {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .team-member-image {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .team-member-info .social-links {
+                justify-content: center;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Forest News</h1>
+                <p class="tagline">Environmental News & Conservation Updates</p>
+            </div>
+            <div class="language-selector">
+                <button id="en-btn" class="active">English</button>
+                <button id="am-btn">አማርኛ</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="en">Home</a><a href="index.html" class="am">መነሻ</a></li>
+                    <li><a href="#" class="en">Latest News</a><a href="#" class="am">አዲስ ዜናዎች</a></li>
+                    <li><a href="#" class="en">Conservation</a><a href="#" class="am">ጥበቃ</a></li>
+                    <li><a href="#" class="en">Climate</a><a href="#" class="am">አየር ንብረት</a></li>
+                    <li><a href="#" class="en">Biodiversity</a><a href="#" class="am">ስነ-ህይወት ብዝሃነት</a></li>
+                    <li><a href="about.html" class="en">About</a><a href="about.html" class="am">ስለ እኛ</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="about-container">
+        <section class="about-header">
+            <h1 class="en">About Forest News</h1>
+            <h1 class="am">ስለ ፎረስት ኒውስ</h1>
+            <p class="en">Dedicated to providing accurate, timely, and impactful news about forest conservation, environmental issues, and sustainable practices in Ethiopia and beyond.</p>
+            <p class="am">በኢትዮጵያ እና ከዚያ ባሻገር ስለ ደን ጥበቃ፣ የአካባቢ ጉዳዮች፣ እና ዘላቂ ልምዶች ትክክለኛ፣ ወቅታዊ፣ እና ተጽዕኖ ፈጣሪ ዜናዎችን ለመስጠት የተሰጠ።</p>
+        </section>
+        
+        <section class="about-mission">
+            <h2 class="en">Our Mission</h2>
+            <h2 class="am">ተልዕኮአችን</h2>
+            <p class="en">Forest News is dedicated to raising awareness about the critical importance of forest conservation and environmental protection in Ethiopia and globally. We believe that informed communities are empowered communities, and through our bilingual reporting, we aim to bridge knowledge gaps and inspire action across language barriers.</p>
+            <p class="am">ፎረስት ኒውስ በኢትዮጵያ እና በዓለም አቀፍ ደረጃ ስለ ደን ጥበቃ እና የአካባቢ ጥበቃ ወሳኝ ጠቀሜታ ግንዛቤ ለማሳደግ የተሰጠ ነው። መረጃ ያላቸው ማህበረሰቦች ብቃት ያላቸው ማህበረሰቦች እንደሆኑ እናምናለን፣ እና በሁለት ቋንቋ ዘገባችን አማካኝነት፣ የእውቀት ክፍተቶችን ለማገናኘት እና በቋንቋ እንቅፋቶች ዙሪያ እርምጃ ለማነሳሳት እንሻለን።</p>
+            <p class="en">Our reporting focuses on the intersection of environmental science, indigenous knowledge, policy, and community action. We strive to highlight solutions alongside challenges, celebrating conservation successes while honestly addressing the threats facing our natural world.</p>
+            <p class="am">የእኛ ዘገባ በአካባቢ ሳይንስ፣ የአካባቢ እውቀት፣ ፖሊሲ፣ እና የማህበረሰብ እርምጃ መጣመሪያ ላይ ያተኩራል። ከፈተናዎች ጎን ለጎን መፍትሄዎችን ለማጉላት እንጥራለን፣ የጥበቃ ስኬቶችን በማክበር በተፈጥሮ ዓለማችን ፊት ያሉትን ስጋቶች በታማኝነት እናስተናግዳለን።</p>
+        </section>
+        
+        <section class="team-section">
+            <h2 class="en">Our Team</h2>
+            <h2 class="am">ቡድናችን</h2>
+            
+            <div class="team-member">
+                <div class="team-member-image">
+                    <img src="images/author-placeholder.jpg" alt="Alemayehu Alemu">
+                </div>
+                <div class="team-member-info">
+                    <h3>Alemayehu Alemu</h3>
+                    <span class="role en">Founder & Editor-in-Chief</span>
+                    <span class="role am">መስራች እና ዋና አዘጋጅ</span>
+                    <p class="en">Alemayehu is an environmentalist and forestry expert working with the Ethiopian government in the Sheka zone, Teppi town. With extensive experience in forest conservation and community engagement, he founded Forest News to bridge the gap between scientific knowledge and public awareness about environmental issues in Ethiopia.</p>
+                    <p class="am">አለማየሁ በሼካ ዞን፣ ጠፍጢ ከተማ ከኢትዮጵያ መንግስት ጋር የሚሰራ የአካባቢ ጥበቃ ባለሙያ እና የደን ባለሙያ ነው። በደን ጥበቃ እና በማህበረሰብ ተሳትፎ ሰፊ ልምድ ያለው፣ በኢትዮጵያ ውስጥ ስለ አካባቢ ጉዳዮች በሳይንሳዊ እውቀት እና በህዝብ ግንዛቤ መካከል ያለውን ክፍተት ለማገናኘት ፎረስት ኒውስን መሰረተ።</p>
+                    <div class="social-links">
+                        <a href="https://t.me/Lexas_1" target="_blank" title="Join our Telegram channel"><i class="fab fa-telegram"></i> Telegram</a>
+                        <a href="https://tiktok.com/@Lexas_Alex" target="_blank" title="Follow our TikTok"><i class="fab fa-tiktok"></i> TikTok</a>
+                        <a href="https://youtube.com/c/Lexi_Tube" target="_blank" title="Subscribe on YouTube"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://x.com/lexasalex6" target="_blank" title="Follow on X"><i class="fab fa-twitter"></i> X (Twitter)</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-member-image">
+                    <img src="images/team-placeholder-1.jpg" alt="Tigist Bekele">
+                </div>
+                <div class="team-member-info">
+                    <h3>Tigist Bekele</h3>
+                    <span class="role en">Senior Environmental Reporter</span>
+                    <span class="role am">ከፍተኛ የአካባቢ ጥበቃ ዘጋቢ</span>
+                    <p class="en">Tigist specializes in climate change reporting and has covered environmental issues across Ethiopia for over a decade. Her in-depth knowledge of climate science and policy makes her reporting both accessible and scientifically sound.</p>
+                    <p class="am">ትግስት በአየር ንብረት ለውጥ ዘገባ ላይ ትሰራለች እና ለአስር ዓመታት በላይ በኢትዮጵያ ውስጥ የአካባቢ ጉዳዮችን ሸፍናለች። የአየር ንብረት ሳይንስ እና ፖሊሲ ጥልቅ እውቀቷ ዘገባዋን ተደራሽ እና ሳይንሳዊ ትክክለኛ ያደርገዋል።</p>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-member-image">
+                    <img src="images/team-placeholder-2.jpg" alt="Dawit Haile">
+                </div>
+                <div class="team-member-info">
+                    <h3>Dawit Haile</h3>
+                    <span class="role en">Indigenous Knowledge Correspondent</span>
+                    <span class="role am">የአካባቢ እውቀት ተጠሪ</span>
+                    <p class="en">Dawit documents traditional ecological knowledge and indigenous conservation practices across Ethiopia's diverse communities. His work highlights the vital role of cultural wisdom in modern conservation efforts.</p>
+                    <p class="am">ዳዊት በኢትዮጵያ የተለያዩ ማህበረሰቦች ውስጥ ባህላዊ ስነ-ምህዳራዊ እውቀት እና የአካባቢ ጥበቃ ልምዶችን ይመዘግባል። ስራው በዘመናዊ የጥበቃ ጥረቶች ውስጥ የባህላዊ ጥበብ ወሳኝ ሚና ያጎላል።</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="contact-section">
+            <h2 class="en">Contact Us</h2>
+            <h2 class="am">አግኙን</h2>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3 class="en">Location</h3>
+                    <h3 class="am">አድራሻ</h3>
+                    <p>Teppi, Sheka Zone, Ethiopia</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3 class="en">Email</h3>
+                    <h3 class="am">ኢሜይል</h3>
+                    <p><a href="mailto:lexasalex6@gmail.com">lexasalex6@gmail.com</a></p>
+                    <p class="en">For business inquiries and collaboration opportunities</p>
+                    <p class="am">ለንግድ ጥያቄዎች እና የትብብር እድሎች</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3 class="en">Phone</h3>
+                    <h3 class="am">ስልክ</h3>
+                    <p><a href="tel:+251912463844">+251 912 463 844</a></p>
+                    <p><a href="tel:+251918965730">+251 918 965 730</a></p>
+                </div>
+            </div>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name" class="en">Your Name</label>
+                    <label for="name" class="am">ስምዎ</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="en">Your Email</label>
+                    <label for="email" class="am">ኢሜይልዎ</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject" class="en">Subject</label>
+                    <label for="subject" class="am">ርዕሰ ጉዳይ</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="en">Your Message</label>
+                    <label for="message" class="am">መልዕክትዎ</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <div class="form-submit">
+                    <button type="submit" class="btn en">Send Message</button>
+                    <button type="submit" class="btn am">መልዕክት ይላኩ</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Forest News</h2>
+                    <p class="en">Environmental News & Conservation Updates</p>
+                    <p class="am">የአካባቢ ጥበቃ ዜናዎች እና የጥበቃ ዝማኔዎች</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3 class="en">Quick Links</h3>
+                        <h3 class="am">ፈጣን ማገናኛዎች</h3>
+                        <ul>
+                            <li><a href="index.html" class="en">Home</a><a href="index.html" class="am">መነሻ</a></li>
+                            <li><a href="#" class="en">Latest News</a><a href="#" class="am">አዲስ ዜናዎች</a></li>
+                            <li><a href="#" class="en">Conservation</a><a href="#" class="am">ጥበቃ</a></li>
+                            <li><a href="#" class="en">Climate</a><a href="#" class="am">አየር ንብረት</a></li>
+                            <li><a href="#" class="en">Biodiversity</a><a href="#" class="am">ስነ-ህይወት ብዝሃነት</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 class="en">Categories</h3>
+                        <h3 class="am">ምድቦች</h3>
+                        <ul>
+                            <li><a href="#" class="en">Forest Conservation</a><a href="#" class="am">የደን ጥበቃ</a></li>
+                            <li><a href="#" class="en">Climate Change</a><a href="#" class="am">የአየር ንብረት ለውጥ</a></li>
+                            <li><a href="#" class="en">Indigenous Knowledge</a><a href="#" class="am">የአካባቢ እውቀት</a></li>
+                            <li><a href="#" class="en">Sustainable Practices</a><a href="#" class="am">ዘላቂ ልምዶች</a></li>
+                            <li><a href="#" class="en">Technology</a><a href="#" class="am">ቴክኖሎጂ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 class="en">Contact</h3>
+                        <h3 class="am">አግኙን</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> <span class="en">Teppi, Sheka Zone, Ethiopia</span><span class="am">ጠፍጢ፣ ሼካ ዞን፣ ኢትዮጵያ</span></li>
+                            <li><i class="fas fa-envelope"></i> <a href="mailto:lexasalex6@gmail.com" title="For inquiries and collaboration opportunities">lexasalex6@gmail.com</a></li>
+                            <li><i class="fas fa-phone"></i> <a href="tel:+251912463844">+251 912 463 844</a> / <a href="tel:+251918965730">+251 918 965 730</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="https://t.me/Lexas_1" target="_blank" title="Join our Telegram channel for updates"><i class="fab fa-telegram"></i></a>
+                            <a href="https://tiktok.com/@Lexas_Alex" target="_blank" title="Follow our TikTok for short-form content"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://youtube.com/c/Lexi_Tube" target="_blank" title="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+                            <a href="https://x.com/lexasalex6" target="_blank" title="Follow us on X for the latest updates"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="en">&copy; 2025 Forest News. All rights reserved. Created by Alemayehu Alemu.</p>
+                <p class="am">&copy; 2025 ፎረስት ኒውስ። መብቱ በህግ የተጠበቀ ነው። በአለማየሁ አለሙ የተፈጠረ።</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Contact form submission
+            const contactForm = document.querySelector('.contact-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const nameInput = document.getElementById('name');
+                    const emailInput = document.getElementById('email');
+                    const subjectInput = document.getElementById('subject');
+                    const messageInput = document.getElementById('message');
+                    
+                    // Simple validation
+                    if (nameInput.value.trim() === '' || 
+                        emailInput.value.trim() === '' || 
+                        subjectInput.value.trim() === '' || 
+                        messageInput.value.trim() === '') {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+                    
+                    // In a real implementation, you would send this to a server
+                    alert('Thank you for your message! We will get back to you soon.');
+                    
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
