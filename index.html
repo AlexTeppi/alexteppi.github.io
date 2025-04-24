@@ -1,25 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forest News | Home</title>
-  <style>
-    body { font-family: Arial; max-width: 700px; margin: auto; padding: 20px; line-height: 1.6; }
-    h1 { color: forestgreen; }
-    a { text-decoration: none; color: darkgreen; }
-    a:hover { text-decoration: underline; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest News | Environmental News & Conservation Updates</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <h1>🌲 Forest News</h1>
-  <p>Welcome to Forest News — your go-to source for environmental news and conservation updates in southwest Ethiopia.</p>
-  <p>Explore our latest content below:</p>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Forest News</h1>
+                <p class="tagline">Environmental News & Conservation Updates</p>
+            </div>
+            <div class="language-selector">
+                <button id="en-btn" class="active">English</button>
+                <button id="am-btn">አማርኛ</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="en">Home</a><a href="index.html" class="am">መነሻ</a></li>
+                    <li><a href="#latest-news" class="en">Latest News</a><a href="#latest-news" class="am">አዲስ ዜናዎች</a></li>
+                    <li><a href="#" class="en">Conservation</a><a href="#" class="am">ጥበቃ</a></li>
+                    <li><a href="#" class="en">Climate</a><a href="#" class="am">አየር ንብረት</a></li>
+                    <li><a href="#" class="en">Biodiversity</a><a href="#" class="am">ስነ-ህይወት ብዝሃነት</a></li>
+                    <li><a href="about.html" class="en">About</a><a href="about.html" class="am">ስለ እኛ</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
 
-  <ul>
-    <li><a href="forests-of-southwest-ethiopia.html">Exploring the Forests of Southwest Ethiopia</a></li>
-  </ul>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="en">Preserving Ethiopia's Forests for Future Generations</h1>
+                    <h1 class="am">የኢትዮጵያን ደኖች ለወደፊት ትውልዶች መጠበቅ</h1>
+                    <p class="en">Discover the latest news, research, and conservation efforts in Ethiopia's unique forest ecosystems.</p>
+                    <p class="am">በኢትዮጵያ ልዩ የደን ስነ-ምህዳሮች ውስጥ ያሉ አዲስ ዜናዎችን፣ ምርምሮችን፣ እና የጥበቃ ጥረቶችን ይወቁ።</p>
+                    
+                    <div class="search-form">
+                        <input type="text" class="search-input en" placeholder="Search for forest news...">
+                        <input type="text" class="search-input am" placeholder="የደን ዜናዎችን ይፈልጉ...">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="search-results-message">
+            <p class="en">No results found. Please try different search terms.</p>
+            <p class="am">ምንም ውጤት አልተገኘም። እባክዎ የተለያዩ የፍለጋ ቃላትን ይሞክሩ።</p>
+        </div>
+        
+        <section class="weather-widget">
+            <div class="container">
+                <div class="weather-icon">
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
+                <div class="weather-info">
+                    <div class="weather-location">Teppi, Sheka Zone</div>
+                    <div class="weather-temp">24°C</div>
+                    <div class="weather-details">
+                        <span class="weather-condition">Partly Cloudy</span>
+                        <span class="weather-humidity">Humidity: 65%</span>
+                        <span class="weather-wind">Wind: 8 km/h</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="category-filters">
+            <div class="container">
+                <div class="category-filter">
+                    <button data-category="all" class="active en">All Categories</button>
+                    <button data-category="all" class="active am">ሁሉም ምድቦች</button>
+                    <button data-category="Conservation" class="en">Conservation</button>
+                    <button data-category="Conservation" class="am">ጥበቃ</button>
+                    <button data-category="Climate" class="en">Climate</button>
+                    <button data-category="Climate" class="am">አየር ንብረት</button>
+                    <button data-category="Indigenous Knowledge" class="en">Indigenous Knowledge</button>
+                    <button data-category="Indigenous Knowledge" class="am">የአካባቢ እውቀት</button>
+                    <button data-category="Technology" class="en">Technology</button>
+                    <button data-category="Technology" class="am">ቴክኖሎጂ</button>
+                    <button data-category="Biodiversity" class="en">Biodiversity</button>
+                    <button data-category="Biodiversity" class="am">ስነ-ህይወት ብዝሃነት</button>
+                </div>
+            </div>
+        </section>
 
-  <p>Stay tuned for more reviews, articles, and updates!</p>
+        <section class="featured-news">
+            <div class="container">
+                <h2 class="section-title en">Featured Stories</h2>
+                <h2 class="section-title am">ተለይተው የቀረቡ ታሪኮች</h2>
+                
+                <div class="news-grid">
+                    <!-- Featured articles will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <section class="latest-news" id="latest-news">
+            <div class="container">
+                <h2 class="section-title en">Latest News</h2>
+                <h2 class="section-title am">አዲስ ዜናዎች</h2>
+                
+                <div class="news-list">
+                    <!-- Latest articles will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+        
+        <section class="related-carousel">
+            <div class="container">
+                <h2 class="section-title en">Related Topics</h2>
+                <h2 class="section-title am">ተዛማጅ ርዕሶች</h2>
+                
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track">
+                    <!-- Related articles will be dynamically inserted here -->
+                </div>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2 class="en">Subscribe to Our Newsletter</h2>
+                    <h2 class="am">ለዜና መጽሄታችን ይመዝገቡ</h2>
+                    <p class="en">Stay updated with the latest environmental news and conservation efforts in Ethiopia and beyond.</p>
+                    <p class="am">በኢትዮጵያ እና ከዚያ ባሻገር ባሉ አዳዲስ የአካባቢ ጥበቃ ዜናዎች እና የጥበቃ ጥረቶች ላይ ወቅታዊ መረጃ ይኑርዎት።</p>
+                    
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address" class="en">
+                        <input type="email" placeholder="የኢሜይል አድራሻዎ" class="am">
+                        <button type="submit" class="en">Subscribe</button>
+                        <button type="submit" class="am">ይመዝገቡ</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Forest News</h2>
+                    <p class="en">Environmental News & Conservation Updates</p>
+                    <p class="am">የአካባቢ ጥበቃ ዜናዎች እና የጥበቃ ዝማኔዎች</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3 class="en">Quick Links</h3>
+                        <h3 class="am">ፈጣን ማገናኛዎች</h3>
+                        <ul>
+                            <li><a href="index.html" class="en">Home</a><a href="index.html" class="am">መነሻ</a></li>
+                            <li><a href="#latest-news" class="en">Latest News</a><a href="#latest-news" class="am">አዲስ ዜናዎች</a></li>
+                            <li><a href="#" class="en">Conservation</a><a href="#" class="am">ጥበቃ</a></li>
+                            <li><a href="#" class="en">Climate</a><a href="#" class="am">አየር ንብረት</a></li>
+                            <li><a href="#" class="en">Biodiversity</a><a href="#" class="am">ስነ-ህይወት ብዝሃነት</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 class="en">Categories</h3>
+                        <h3 class="am">ምድቦች</h3>
+                        <ul>
+                            <li><a href="#" class="en">Forest Conservation</a><a href="#" class="am">የደን ጥበቃ</a></li>
+                            <li><a href="#" class="en">Climate Change</a><a href="#" class="am">የአየር ንብረት ለውጥ</a></li>
+                            <li><a href="#" class="en">Indigenous Knowledge</a><a href="#" class="am">የአካባቢ እውቀት</a></li>
+                            <li><a href="#" class="en">Sustainable Practices</a><a href="#" class="am">ዘላቂ ልምዶች</a></li>
+                            <li><a href="#" class="en">Technology</a><a href="#" class="am">ቴክኖሎጂ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 class="en">Contact</h3>
+                        <h3 class="am">አግኙን</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> <span class="en">Teppi, Sheka Zone, Ethiopia</span><span class="am">ጠፍጢ፣ ሼካ ዞን፣ ኢትዮጵያ</span></li>
+                            <li><i class="fas fa-envelope"></i> <a href="mailto:lexasalex6@gmail.com" title="For inquiries and collaboration opportunities">lexasalex6@gmail.com</a></li>
+                            <li><i class="fas fa-phone"></i> <a href="tel:+251912463844">+251 912 463 844</a> / <a href="tel:+251918965730">+251 918 965 730</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="https://t.me/Lexas_1" target="_blank" title="Join our Telegram channel for updates"><i class="fab fa-telegram"></i></a>
+                            <a href="https://tiktok.com/@Lexas_Alex" target="_blank" title="Follow our TikTok for short-form content"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://www.youtube.com/channel/UCVfOo8TT5nT59SJTWkf-WZA" target="_blank" title="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+                            <a href="https://x.com/lexasalex6" target="_blank" title="Follow us on X for the latest updates"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/lexas_alex_teppi/" target="_blank" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="en">&copy; 2025 Forest News. All rights reserved. Created by Alemayehu Alemu.</p>
+                <p class="am">&copy; 2025 ፎረስት ኒውስ። መብቱ በህግ የተጠበቀ ነው። በአለማየሁ አለሙ የተፈጠረ።</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/cms.js"></script>
+    <script src="js/features.js"></script>
 </body>
 </html>
