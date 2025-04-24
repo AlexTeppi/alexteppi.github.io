@@ -1,509 +1,214 @@
-// Category Filter Functionality
+// Features and functionality for Forest News Website
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all category filter buttons
-    const categoryFilters = document.querySelectorAll('.category-filter button');
+    // Initialize CMS
+    const cms = new ForestNewsCMS();
+    cms.loadArticles();
     
-    if (categoryFilters.length > 0) {
-        // Add click event to each filter button
-        categoryFilters.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons
-                categoryFilters.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Get selected category
-                const category = this.getAttribute('data-category');
-                
-                // Get all news items
-                const newsItems = document.querySelectorAll('.news-card, .news-item');
-                
-                // Filter news items based on selected category
-                newsItems.forEach(item => {
-                    const itemCategory = item.querySelector('.category').textContent;
-                    
-                    if (category === 'all' || itemCategory === category) {
-                        item.style.display = 'flex';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
+    // If no articles exist, initialize with sample content
+    if (cms.getAllArticles().length === 0) {
+        cms.initializeWithSampleContent();
     }
+    
+    // Create placeholder images for articles if they don't exist
+    const articleImages = [
+        { name: 'sheka-forest.jpg', color: '#2e7d32' },
+        { name: 'climate-change.jpg', color: '#0277bd' },
+        { name: 'indigenous-knowledge.jpg', color: '#8d6e63' },
+        { name: 'ai-forest-monitoring.jpg', color: '#546e7a' },
+        { name: 'community-conservation.jpg', color: '#558b2f' }
+    ];
+    
+    // Create placeholder images for articles
+    createPlaceholderImages(articleImages);
+    
+    // Populate featured articles
+    populateFeaturedArticles(cms);
+    
+    // Populate latest articles
+    populateLatestArticles(cms);
+    
+    // Language switcher functionality
+    initLanguageSwitcher();
+    
+    // Mobile menu toggle
+    initMobileMenu();
 });
 
-// Search Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const searchForm = document.querySelector('.search-form');
-    const searchInput = document.querySelector('.search-input');
-    
-    if (searchForm && searchInput) {
-        searchForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const searchTerm = searchInput.value.trim().toLowerCase();
-            
-            if (searchTerm === '') return;
-            
-            // Get all news items
-            const newsItems = document.querySelectorAll('.news-card, .news-item');
-            
-            // Filter news items based on search term
-            let hasResults = false;
-            
-            newsItems.forEach(item => {
-                const titleEn = item.querySelector('h3.en').textContent.toLowerCase();
-                const titleAm = item.querySelector('h3.am').textContent;
-                const contentEn = item.querySelector('p.en') ? item.querySelector('p.en').textContent.toLowerCase() : '';
-                const contentAm = item.querySelector('p.am') ? item.querySelector('p.am').textContent : '';
-                
-                // Check if search term is in title or content
-                if (titleEn.includes(searchTerm) || 
-                    titleAm.includes(searchTerm) || 
-                    contentEn.includes(searchTerm) || 
-                    contentAm.includes(searchTerm)) {
-                    item.style.display = 'flex';
-                    hasResults = true;
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-            
-            // Show message if no results found
-            const resultsMessage = document.querySelector('.search-results-message');
-            
-            if (resultsMessage) {
-                if (!hasResults) {
-                    resultsMessage.style.display = 'block';
-                    resultsMessage.querySelector('.en').style.display = document.documentElement.classList.contains('am-lang') ? 'none' : 'block';
-                    resultsMessage.querySelector('.am').style.display = document.documentElement.classList.contains('am-lang') ? 'block' : 'none';
-                } else {
-                    resultsMessage.style.display = 'none';
-                }
-            }
-        });
-    }
-});
-
-// Share Article Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const shareButtons = document.querySelectorAll('.share-button');
-    
-    if (shareButtons.length > 0) {
-        shareButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const articleId = this.closest('[data-article-id]').getAttribute('data-article-id');
-                const shareUrl = `${window.location.origin}/article.html?id=${articleId}`;
-                
-                // Check if Web Share API is supported
-                if (navigator.share) {
-                    navigator.share({
-                        title: document.title,
-                        url: shareUrl
-                    })
-                    .catch(error => console.log('Error sharing:', error));
-                } else {
-                    // Fallback: Copy to clipboard
-                    navigator.clipboard.writeText(shareUrl)
-                        .then(() => {
-                            // Show copied message
-                            const message = document.createElement('div');
-                            message.className = 'copy-message';
-                            
-                            const messageText = document.documentElement.classList.contains('am-lang') 
-                                ? 'ለመጋራት URL ተቀድቷል' 
-                                : 'URL copied for sharing';
-                                
-                            message.textContent = messageText;
-                            document.body.appendChild(message);
-                            
-                            // Remove message after 2 seconds
-                            setTimeout(() => {
-                                message.remove();
-                            }, 2000);
-                        })
-                        .catch(error => console.log('Error copying:', error));
-                }
-            });
-        });
-    }
-});
-
-// Comment System
-document.addEventListener('DOMContentLoaded', function() {
-    const commentForm = document.querySelector('.comment-form');
-    const commentsList = document.querySelector('.comments-list');
-    
-    if (commentForm && commentsList) {
-        commentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nameInput = document.getElementById('comment-name');
-            const commentInput = document.getElementById('comment-text');
-            
-            if (!nameInput || !commentInput) return;
-            
-            const name = nameInput.value.trim();
-            const comment = commentInput.value.trim();
-            
-            if (name === '' || comment === '') {
-                alert(document.documentElement.classList.contains('am-lang') 
-                    ? 'እባክዎ ሁሉንም መስኮች ይሙሉ' 
-                    : 'Please fill in all fields');
-                return;
-            }
-            
-            // Create new comment element
-            const newComment = document.createElement('div');
-            newComment.className = 'comment';
-            
-            const date = new Date();
-            const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-            
-            newComment.innerHTML = `
-                <div class="comment-header">
-                    <h4>${name}</h4>
-                    <span class="comment-date">${formattedDate}</span>
-                </div>
-                <div class="comment-body">
-                    <p>${comment}</p>
-                </div>
-            `;
-            
-            // Add new comment to the list
-            commentsList.appendChild(newComment);
-            
-            // Clear form
-            commentForm.reset();
-        });
-    }
-});
-
-// Print Article Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const printButtons = document.querySelectorAll('.print-button');
-    
-    if (printButtons.length > 0) {
-        printButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                window.print();
-            });
-        });
-    }
-});
-
-// Font Size Adjustment
-document.addEventListener('DOMContentLoaded', function() {
-    const increaseFontButton = document.querySelector('.increase-font');
-    const decreaseFontButton = document.querySelector('.decrease-font');
-    const resetFontButton = document.querySelector('.reset-font');
-    
-    if (increaseFontButton && decreaseFontButton && resetFontButton) {
-        // Default font size (in percentage)
-        let currentFontSize = 100;
+// Create placeholder images for articles
+function createPlaceholderImages(images) {
+    images.forEach(img => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 800;
+        canvas.height = 500;
+        const ctx = canvas.getContext('2d');
         
-        // Increase font size
-        increaseFontButton.addEventListener('click', function() {
-            if (currentFontSize < 150) {
-                currentFontSize += 10;
-                document.body.style.fontSize = `${currentFontSize}%`;
-            }
+        // Fill background
+        ctx.fillStyle = img.color;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Add text
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 32px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(img.name.replace('.jpg', '').replace(/-/g, ' '), canvas.width/2, canvas.height/2);
+        
+        // Convert to data URL
+        const dataUrl = canvas.toDataURL('image/jpeg');
+        
+        // Create image element with the data URL
+        const img_element = document.createElement('img');
+        img_element.src = dataUrl;
+        img_element.alt = img.name.replace('.jpg', '').replace(/-/g, ' ');
+        img_element.className = 'placeholder-image';
+        img_element.dataset.filename = img.name;
+        
+        // Append to hidden container
+        const container = document.createElement('div');
+        container.style.display = 'none';
+        container.appendChild(img_element);
+        document.body.appendChild(container);
+    });
+}
+
+// Populate featured articles
+function populateFeaturedArticles(cms) {
+    const featuredArticles = cms.getFeaturedArticles();
+    const featuredContainer = document.querySelector('.news-grid');
+    
+    if (featuredContainer && featuredArticles.length > 0) {
+        featuredContainer.innerHTML = '';
+        
+        featuredArticles.forEach(article => {
+            const articleElement = createArticleCard(article);
+            featuredContainer.appendChild(articleElement);
+        });
+    }
+}
+
+// Populate latest articles
+function populateLatestArticles(cms) {
+    const latestArticles = cms.getLatestArticles();
+    const latestContainer = document.querySelector('.news-list');
+    
+    if (latestContainer && latestArticles.length > 0) {
+        latestContainer.innerHTML = '';
+        
+        latestArticles.forEach(article => {
+            const articleElement = createArticleListItem(article);
+            latestContainer.appendChild(articleElement);
+        });
+    }
+}
+
+// Create article card for featured section
+function createArticleCard(article) {
+    const card = document.createElement('div');
+    card.className = 'news-card';
+    card.dataset.id = article.id;
+    
+    // Find placeholder image if it exists
+    let imageSrc = article.image;
+    const placeholderImg = document.querySelector(`.placeholder-image[data-filename="${article.image.split('/').pop()}"]`);
+    if (placeholderImg) {
+        imageSrc = placeholderImg.src;
+    }
+    
+    card.innerHTML = `
+        <div class="news-image">
+            <img src="${imageSrc}" alt="${article.title_en}">
+        </div>
+        <div class="news-content">
+            <span class="category">${article.category}</span>
+            <h3 class="en">${article.title_en}</h3>
+            <h3 class="am">${article.title_am}</h3>
+            <p class="en">${article.content_en.substring(0, 120)}...</p>
+            <p class="am">${article.content_am.substring(0, 120)}...</p>
+            <div class="news-meta">
+                <span>${article.date}</span>
+                <a href="article.html?id=${article.id}" class="read-more en">Read More</a>
+                <a href="article.html?id=${article.id}" class="read-more am">ተጨማሪ ያንብቡ</a>
+            </div>
+        </div>
+    `;
+    
+    return card;
+}
+
+// Create article list item for latest section
+function createArticleListItem(article) {
+    const item = document.createElement('div');
+    item.className = 'news-item';
+    item.dataset.id = article.id;
+    
+    // Find placeholder image if it exists
+    let imageSrc = article.image;
+    const placeholderImg = document.querySelector(`.placeholder-image[data-filename="${article.image.split('/').pop()}"]`);
+    if (placeholderImg) {
+        imageSrc = placeholderImg.src;
+    }
+    
+    item.innerHTML = `
+        <div class="news-item-image">
+            <img src="${imageSrc}" alt="${article.title_en}">
+        </div>
+        <div class="news-item-content">
+            <span class="category">${article.category}</span>
+            <h3 class="en">${article.title_en}</h3>
+            <h3 class="am">${article.title_am}</h3>
+            <p class="en">${article.content_en.substring(0, 200)}...</p>
+            <p class="am">${article.content_am.substring(0, 200)}...</p>
+            <div class="news-meta">
+                <span>${article.date} | ${article.author}</span>
+                <a href="article.html?id=${article.id}" class="read-more en">Read More</a>
+                <a href="article.html?id=${article.id}" class="read-more am">ተጨማሪ ያንብቡ</a>
+            </div>
+        </div>
+    `;
+    
+    return item;
+}
+
+// Initialize language switcher
+function initLanguageSwitcher() {
+    const enBtn = document.getElementById('en-btn');
+    const amBtn = document.getElementById('am-btn');
+    
+    if (enBtn && amBtn) {
+        enBtn.addEventListener('click', function() {
+            document.body.classList.remove('amharic');
+            enBtn.classList.add('active');
+            amBtn.classList.remove('active');
+            localStorage.setItem('forestNewsLanguage', 'en');
         });
         
-        // Decrease font size
-        decreaseFontButton.addEventListener('click', function() {
-            if (currentFontSize > 70) {
-                currentFontSize -= 10;
-                document.body.style.fontSize = `${currentFontSize}%`;
-            }
+        amBtn.addEventListener('click', function() {
+            document.body.classList.add('amharic');
+            amBtn.classList.add('active');
+            enBtn.classList.remove('active');
+            localStorage.setItem('forestNewsLanguage', 'am');
         });
         
-        // Reset font size
-        resetFontButton.addEventListener('click', function() {
-            currentFontSize = 100;
-            document.body.style.fontSize = '100%';
-        });
-    }
-});
-
-// Dark Mode Toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const darkModeToggle = document.querySelector('.dark-mode-toggle');
-    
-    if (darkModeToggle) {
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            darkModeToggle.classList.add('active');
-        }
-        
-        // Toggle dark mode
-        darkModeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('dark-theme');
-            this.classList.toggle('active');
-            
-            // Save preference
-            if (document.body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    }
-});
-
-// Related Articles Carousel
-document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('.related-carousel');
-    
-    if (carousel) {
-        const prevButton = carousel.querySelector('.carousel-prev');
-        const nextButton = carousel.querySelector('.carousel-next');
-        const carouselTrack = carousel.querySelector('.carousel-track');
-        
-        if (prevButton && nextButton && carouselTrack) {
-            let position = 0;
-            const slideWidth = carouselTrack.querySelector('.news-card').offsetWidth + 20; // Width + margin
-            const slidesCount = carouselTrack.querySelectorAll('.news-card').length;
-            const visibleSlides = Math.floor(carousel.offsetWidth / slideWidth);
-            const maxPosition = (slidesCount - visibleSlides) * slideWidth;
-            
-            // Update carousel position
-            function updatePosition() {
-                carouselTrack.style.transform = `translateX(-${position}px)`;
-                
-                // Update button states
-                prevButton.disabled = position === 0;
-                nextButton.disabled = position >= maxPosition;
-            }
-            
-            // Previous slide
-            prevButton.addEventListener('click', function() {
-                position = Math.max(0, position - slideWidth);
-                updatePosition();
-            });
-            
-            // Next slide
-            nextButton.addEventListener('click', function() {
-                position = Math.min(maxPosition, position + slideWidth);
-                updatePosition();
-            });
-            
-            // Initialize
-            updatePosition();
-            
-            // Update on window resize
-            window.addEventListener('resize', function() {
-                const newVisibleSlides = Math.floor(carousel.offsetWidth / slideWidth);
-                const newMaxPosition = (slidesCount - newVisibleSlides) * slideWidth;
-                
-                position = Math.min(position, newMaxPosition);
-                updatePosition();
-            });
+        // Set initial language based on localStorage
+        const savedLanguage = localStorage.getItem('forestNewsLanguage');
+        if (savedLanguage === 'am') {
+            amBtn.click();
+        } else {
+            enBtn.click();
         }
     }
-});
+}
 
-// Weather Widget
-document.addEventListener('DOMContentLoaded', function() {
-    const weatherWidget = document.querySelector('.weather-widget');
-    
-    if (weatherWidget) {
-        // Simulate weather data (in a real implementation, this would come from an API)
-        const weatherData = {
-            location: 'Teppi, Sheka Zone',
-            temperature: 24,
-            condition: 'Partly Cloudy',
-            humidity: 65,
-            wind: 8
-        };
-        
-        // Update weather widget
-        const locationElement = weatherWidget.querySelector('.weather-location');
-        const tempElement = weatherWidget.querySelector('.weather-temp');
-        const conditionElement = weatherWidget.querySelector('.weather-condition');
-        const humidityElement = weatherWidget.querySelector('.weather-humidity');
-        const windElement = weatherWidget.querySelector('.weather-wind');
-        
-        if (locationElement) locationElement.textContent = weatherData.location;
-        if (tempElement) tempElement.textContent = `${weatherData.temperature}°C`;
-        if (conditionElement) conditionElement.textContent = weatherData.condition;
-        if (humidityElement) humidityElement.textContent = `${weatherData.humidity}%`;
-        if (windElement) windElement.textContent = `${weatherData.wind} km/h`;
-    }
-});
-
-// Newsletter Subscription Validation
-document.addEventListener('DOMContentLoaded', function() {
-    const newsletterForm = document.querySelector('.newsletter-form');
-    
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const emailInput = this.querySelector('input[type="email"]');
-            
-            if (!emailInput) return;
-            
-            const email = emailInput.value.trim();
-            
-            // Simple email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            if (!emailRegex.test(email)) {
-                alert(document.documentElement.classList.contains('am-lang') 
-                    ? 'እባክዎ ትክክለኛ የኢሜይል አድራሻ ያስገቡ' 
-                    : 'Please enter a valid email address');
-                return;
-            }
-            
-            // Simulate subscription (in a real implementation, this would be sent to a server)
-            const successMessage = document.createElement('div');
-            successMessage.className = 'subscription-success';
-            
-            const messageText = document.documentElement.classList.contains('am-lang') 
-                ? 'ለዜና መጽሄታችን በተሳካ ሁኔታ ተመዝግበዋል!' 
-                : 'Successfully subscribed to our newsletter!';
-                
-            successMessage.textContent = messageText;
-            
-            // Replace form with success message
-            newsletterForm.parentNode.replaceChild(successMessage, newsletterForm);
-        });
-    }
-});
-
-// Mobile Navigation Improvements
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+// Initialize mobile menu
+function initMobileMenu() {
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
     const nav = document.querySelector('nav');
     
-    if (mobileMenuToggle && nav) {
-        mobileMenuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', function() {
             nav.classList.toggle('active');
-            
-            // Prevent body scrolling when menu is open
-            document.body.classList.toggle('menu-open');
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (nav.classList.contains('active') && 
-                !nav.contains(e.target) && 
-                !mobileMenuToggle.contains(e.target)) {
-                mobileMenuToggle.classList.remove('active');
-                nav.classList.remove('active');
-                document.body.classList.remove('menu-open');
-            }
+            menuToggle.classList.toggle('active');
         });
     }
-});
-
-// Scroll to Top Button
-document.addEventListener('DOMContentLoaded', function() {
-    // Create scroll to top button
-    const scrollButton = document.createElement('button');
-    scrollButton.className = 'scroll-to-top';
-    scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    document.body.appendChild(scrollButton);
-    
-    // Show/hide button based on scroll position
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            scrollButton.classList.add('visible');
-        } else {
-            scrollButton.classList.remove('visible');
-        }
-    });
-    
-    // Scroll to top when clicked
-    scrollButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Add article interaction features
-document.addEventListener('DOMContentLoaded', function() {
-    // Add share, print, and font size buttons to article pages
-    const articleContent = document.getElementById('article-content');
-    
-    if (articleContent) {
-        // Create article tools container
-        const articleTools = document.createElement('div');
-        articleTools.className = 'article-tools';
-        
-        // Add font size controls
-        const fontControls = document.createElement('div');
-        fontControls.className = 'font-controls';
-        fontControls.innerHTML = `
-            <button class="decrease-font" title="Decrease font size"><i class="fas fa-minus"></i></button>
-            <button class="reset-font" title="Reset font size"><i class="fas fa-font"></i></button>
-            <button class="increase-font" title="Increase font size"><i class="fas fa-plus"></i></button>
-        `;
-        
-        // Add share and print buttons
-        const shareTools = document.createElement('div');
-        shareTools.className = 'share-tools';
-        shareTools.innerHTML = `
-            <button class="share-button" title="Share article"><i class="fas fa-share-alt"></i> <span class="en">Share</span><span class="am">አጋራ</span></button>
-            <button class="print-button" title="Print article"><i class="fas fa-print"></i> <span class="en">Print</span><span class="am">አትም</span></button>
-        `;
-        
-        // Add dark mode toggle
-        const darkModeButton = document.createElement('button');
-        darkModeButton.className = 'dark-mode-toggle';
-        darkModeButton.innerHTML = '<i class="fas fa-moon"></i>';
-        darkModeButton.title = 'Toggle dark mode';
-        
-        // Append all tools
-        articleTools.appendChild(fontControls);
-        articleTools.appendChild(shareTools);
-        articleTools.appendChild(darkModeButton);
-        
-        // Insert tools after article header
-        const articleHeader = articleContent.querySelector('.article-header');
-        if (articleHeader) {
-            articleHeader.parentNode.insertBefore(articleTools, articleHeader.nextSibling);
-        }
-        
-        // Add comments section
-        const commentsSection = document.createElement('section');
-        commentsSection.className = 'comments-section';
-        commentsSection.innerHTML = `
-            <h2 class="en">Comments</h2>
-            <h2 class="am">አስተያየቶች</h2>
-            
-            <form class="comment-form">
-                <div class="form-group">
-                    <label for="comment-name" class="en">Your Name</label>
-                    <label for="comment-name" class="am">ስምዎ</label>
-                    <input type="text" id="comment-name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="comment-text" class="en">Your Comment</label>
-                    <label for="comment-text" class="am">አስተያየትዎ</label>
-                    <textarea id="comment-text" required></textarea>
-                </div>
-                
-                <button type="submit" class="en">Post Comment</button>
-                <button type="submit" class="am">አስተያየት ይለጥፉ</button>
-            </form>
-            
-            <div class="comments-list">
-                <!-- Comments will be added here -->
-            </div>
-        `;
-        
-        // Add comments section after article content
-        articleContent.parentNode.insertBefore(commentsSection, articleContent.nextSibling);
-    }
-});
+}
